@@ -1,7 +1,7 @@
-import Robot from './src/Robot';
-import Table from './src/Table';
-import Commander from './src/Commander';
-import Parser from './src/Parser';
+import Robot from './Robot';
+import Table from './Table';
+import Commander from './Commander';
+import Parser from './Parser';
 import readline from 'readline';
 
 const rl = readline.createInterface({

@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
   entry: {
-    javascript: './app.js',
+    javascript: './src/app.js',
   },
   output: {
     path: path.resolve(__dirname, './lib'),
