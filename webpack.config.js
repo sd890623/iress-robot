@@ -8,10 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, './lib'),
     filename: 'bundle.js',
   },
-  devServer: {
-    inline: true,
-    port: 8001,
-  },
+  target: 'node',
   module: {
     loaders: [
       {
