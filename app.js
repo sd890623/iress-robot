@@ -13,17 +13,22 @@ const robot = new Robot();
 const table = new Table();
 let commander = null;
 
-const handleLineInput = (val) => {
-
+export const processCommander = (val, commander) => {
   const parsedInput = Parser.parseInput(val);
+  let status = false;
   switch (parsedInput) {
     case Parser.PLACE:
       const positionAndFacing = Parser.parsePlace(val);
       if (positionAndFacing) {
-        commander = new Commander(robot, table);
-        commander.setPosition(positionAndFacing.position);
-        commander.setFacing(positionAndFacing.facing);
+        let newCommander = new Commander(robot, table);
+        status = newCommander.setPosition(positionAndFacing.position);
+        if (!status) {
+          console.log('The robot is put to illegal position.');
+          break;
+        }
+        newCommander.setFacing(positionAndFacing.direction);
         console.log('Position and facing set.');
+        commander = newCommander;
       } else {
         console.log('Illegal Place Instructions.');
       }
@@ -38,17 +43,37 @@ const handleLineInput = (val) => {
         }
       }
       break;
+    case Parser.LEFT:
+      if (commander) {
+        commander.left();
+        console.log('Rotated left');
+      }
+      break;
+    case Parser.RIGHT:
+      if (commander) {
+        commander.right();
+        console.log('Rotated right');
+      }
+      break;
     case Parser.REPORT:
-      console.log(commander.getReport());
+      if (commander) {
+        console.log(commander.getReport());
+      }
       break;
     default:
       console.log('Illegal instructions received.')
   }
+  return commander;
+}
+
+const handleInput = (val) => {
+  commander = processCommander(val, commander);
 }
 
 console.log('Welcome to toy robot command line, plz input your instructions');
+
 rl
-.on('line', handleLineInput)
+.on('line', handleInput)
 .on('close', ()=> {
   console.log('Thanks for playing');
   process.exit(0);
