@@ -103,7 +103,7 @@ export default class Commander {
     const facing = this.facing % 4;
     switch (facing) {
       case 0:
-        return 'WEST';
+        return 'NORTH';
       case 1:
         return 'EAST';
       case 2:
