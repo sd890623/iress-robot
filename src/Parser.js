@@ -2,20 +2,24 @@ export default class Parser {
   static get PLACE() {
     return 'PLACE';
   }
+
   static get MOVE() {
     return 'MOVE';
   }
+
   static get LEFT() {
     return 'LEFT';
   }
+
   static get RIGHT() {
     return 'RIGHT';
   }
+
   static get REPORT() {
     return 'REPORT';
   }
 
- static parseInput(input) {
+  static parseInput(input) {
     const upperCaseInput = input.toUpperCase();
     if (upperCaseInput.includes(`${Parser.PLACE} `)) {
       return Parser.PLACE;
@@ -44,7 +48,7 @@ export default class Parser {
     const axisY = parseInt(args[1], 10);
 
     const direction = args[2];
-    if (!isNaN(axisX) && !isNaN(axisY) && directions.includes(direction)) {
+    if (!Number.isNaN(axisX) && !Number.isNaN(axisY) && directions.includes(direction)) {
       return { position: { x: axisX, y: axisY }, direction };
     } else {
       return null;

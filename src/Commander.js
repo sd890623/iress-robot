@@ -1,4 +1,4 @@
-import Table from '../src/Table';
+import Table from './Table';
 
 export default class Commander {
   constructor() {
@@ -7,7 +7,7 @@ export default class Commander {
     this.facing = 0;
   }
 
-  isPositionLegal(position) {
+  static isPositionLegal(position) {
     if (position.x < 0 || position.y < 0) {
       return false;
     }
@@ -18,7 +18,7 @@ export default class Commander {
   }
 
   setPosition(position) {
-    if (this.isPositionLegal(position)) {
+    if (Commander.isPositionLegal(position)) {
       this.x = position.x;
       this.y = position.y;
       return true;
@@ -32,7 +32,7 @@ export default class Commander {
   }
 
   setFacing(facing) {
-    switch(facing) {
+    switch (facing) {
       case 'N':
         this.facing = 0;
         break;
@@ -57,7 +57,7 @@ export default class Commander {
 
   move() {
     const facing = this.facing % 4;
-    switch(facing) {
+    switch (facing) {
       case 0:
         if (this.y === Table.height - 1) {
           return false;
@@ -101,20 +101,17 @@ export default class Commander {
 
   convertIntFacingToWord() {
     const facing = this.facing % 4;
-    switch(facing) {
+    switch (facing) {
       case 0:
         return 'WEST';
-        break;
       case 1:
         return 'EAST';
-        break;
       case 2:
         return 'SOUTH';
-        break;
       case 3:
         return 'WEST';
-        break;
       default:
+        return null;
     }
   }
 

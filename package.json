@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix",
     "build": "webpack",
     "start": "node lib/bundle.js"
   },

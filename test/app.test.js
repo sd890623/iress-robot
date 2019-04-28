@@ -1,4 +1,4 @@
-import { processCommander } from '../src/app';
+import processCommander from '../src/app';
 
 describe('App', () => {
   it('should fail illegal inputs', () => {

@@ -1,26 +1,26 @@
+import readline from 'readline';
 import Robot from './Robot';
 import Table from './Table';
 import Commander from './Commander';
 import Parser from './Parser';
-import readline from 'readline';
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 });
 
 const robot = new Robot();
 const table = new Table();
-let commander = null;
+let commanderInstance = null;
 
-export const processCommander = (val, commander) => {
+const processCommander = (val, commander) => {
   const parsedInput = Parser.parseInput(val);
   let status = false;
   switch (parsedInput) {
-    case Parser.PLACE:
+    case Parser.PLACE: {
       const positionAndFacing = Parser.parsePlace(val);
       if (positionAndFacing) {
-        let newCommander = new Commander(robot, table);
+        const newCommander = new Commander(robot, table);
         status = newCommander.setPosition(positionAndFacing.position);
         if (!status) {
           console.log('The robot is put to illegal position.');
@@ -28,14 +28,15 @@ export const processCommander = (val, commander) => {
         }
         newCommander.setFacing(positionAndFacing.direction);
         console.log('Position and facing set.');
-        commander = newCommander;
+        return newCommander;
       } else {
         console.log('Illegal Place Instructions.');
       }
       break;
+    }
     case Parser.MOVE:
       if (commander) {
-        const status = commander.move();
+        status = commander.move();
         if (status) {
           console.log('Moved');
         } else {
@@ -61,20 +62,22 @@ export const processCommander = (val, commander) => {
       }
       break;
     default:
-      console.log('Illegal instructions received.')
+      console.log('Illegal instructions received.');
   }
   return commander;
-}
+};
 
 const handleInput = (val) => {
-  commander = processCommander(val, commander);
-}
+  commanderInstance = processCommander(val, commanderInstance);
+};
 
 console.log('Welcome to toy robot command line, plz input your instructions');
 
 rl
-.on('line', handleInput)
-.on('close', ()=> {
-  console.log('Thanks for playing');
-  process.exit(0);
-})
+  .on('line', handleInput)
+  .on('close', () => {
+    console.log('Thanks for playing');
+    process.exit(0);
+  });
+
+export default processCommander;
