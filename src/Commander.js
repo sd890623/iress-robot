@@ -1,4 +1,4 @@
-import Table from './src/Table';
+import Table from '../src/Table';
 
 export default class Commander {
   constructor() {

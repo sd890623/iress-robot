@@ -12,16 +12,13 @@ module.exports = {
   module: {
     loaders: [
       {
+        exclude: ['node_modules'],
         test: /\.js$/,
         loader: 'babel',
         query: {
           presets: ['es2015'],
           plugins: ["transform-object-rest-spread"],
         }
-      },
-      {
-        test: /\.html$|\.css$/,
-        loader: 'file?name=[name].[ext]'
       }
     ]
   }
