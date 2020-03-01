@@ -1,6 +1,4 @@
 import readline from 'readline';
-import Robot from './Robot';
-import Table from './Table';
 import Commander from './Commander';
 import Parser from './Parser';
 

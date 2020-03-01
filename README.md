@@ -12,11 +12,13 @@ npm install
 npm run build
 ```
 
-# Run
+# Run And Play
 
 ```sh
 npm start
+For commands available please refer to the code challenge instructions provided with IRESS.
 ```
+
 
 # Test and Eslint
 
