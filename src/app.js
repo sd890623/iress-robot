@@ -9,8 +9,6 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
-const robot = new Robot();
-const table = new Table();
 let commanderInstance = null;
 
 const processCommander = (val, commander) => {
@@ -20,7 +18,7 @@ const processCommander = (val, commander) => {
     case Parser.PLACE: {
       const positionAndFacing = Parser.parsePlace(val);
       if (positionAndFacing) {
-        const newCommander = new Commander(robot, table);
+        const newCommander = new Commander();
         status = newCommander.setPosition(positionAndFacing.position);
         if (!status) {
           console.log('The robot is put to illegal position.');

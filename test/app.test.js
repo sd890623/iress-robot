@@ -1,6 +1,6 @@
 import processCommander from '../src/app';
 
-describe('App', () => {
+describe('App processCommander', () => {
   it('should fail illegal inputs', () => {
     let commander = null;
     commander = processCommander('Place 2,2,d', commander);
